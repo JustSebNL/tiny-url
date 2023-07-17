@@ -1,3 +1,5 @@
+src/pages/index.js
+
 import React, { useState } from 'react';
 
 export default function IndexPage() {
@@ -9,6 +11,13 @@ export default function IndexPage() {
     // Generate short URL from input URL
     const generatedShortUrl = `short-url.nl?id=${Math.random().toString(36).substring(2, 15)}`;
     setShortUrl(generatedShortUrl);
+    // Dispatch action to the Redux store to manage the URL state
+    dispatchActionToReduxStore();
+  };
+
+  const dispatchActionToReduxStore = () => {
+    // Dispatch action to the Redux store
+    // to manage the URL state
   };
 
   return (
