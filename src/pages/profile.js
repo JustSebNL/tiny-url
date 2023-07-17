@@ -1,16 +1,26 @@
 import React from 'react';
-import { Google, Microsoft, Apple, GitHub } from 'supertokens-auth-react/recipe/thirdparty';
-import { ThirdParty } from 'supertokens-auth-react/recipe/thirdparty';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeUrl } from '../store/actions';
 
-export default function LoginPage() {
-  return (
-    <div>
-      <ThirdParty>
-        <Google clientId="YOUR_GOOGLE_CLIENT_ID" />
-        <Microsoft clientId="YOUR_MICROSOFT_CLIENT_ID" />
-        <Apple clientId="YOUR_APPLE_CLIENT_ID" />
-        <GitHub clientId="YOUR_GITHUB_CLIENT_ID" />
-      </ThirdParty>
-    </div>
-  );
+export default function ProfilePage() {
+    const shortUrls = useSelector((state) => state.urls);
+    const dispatch = useDispatch();
+
+    const handleRemoveUrl = (url) => {
+        dispatch(removeUrl(url));
+    };
+
+    return (
+        <div>
+            <h1>Your Short URLs</h1>
+            <ul>
+                {shortUrls.map((url, index) => (
+                    <li key={index}>
+                        <a href={url}>{url}</a>
+                        <button onClick={() => handleRemoveUrl(url)}>Remove</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
