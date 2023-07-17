@@ -1,7 +1,14 @@
+src/pages/login.js
+
 import React, { useState } from 'react';
 
-export default function ProfilePage() {
-  const [shortUrls, setShortUrls] = useState([]);
+export default function LoginPage() {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  const handleLogin = () => {
+    // Implement login functionality using Supertokens and supported authentication providers
+    // Dispatch actions to the Redux store to manage the user state
+  };
 
   const handleAddUrl = (url) => {
     setShortUrls([...shortUrls, url]);
@@ -23,6 +30,11 @@ export default function ProfilePage() {
         ))}
       </ul>
       <button onClick={() => handleAddUrl(prompt('Enter a URL'))}>Add URL</button>
+      {authenticated ? (
+        <h1>Welcome, User!</h1>
+      ) : (
+        <button onClick={handleLogin}>Login with Supertokens</button>
+      )}
     </div>
   );
 }
